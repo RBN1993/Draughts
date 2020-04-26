@@ -25,7 +25,7 @@ public class Game {
                 Color color = Color.getInitialColor(coordinate);
                 Piece piece = null;
                 if (color != null)
-                    piece = new Pawn(color);
+                    piece = new Piece(color);
                 this.board.put(coordinate, piece);
             }
         if (this.turn.getColor() != Color.WHITE)
@@ -98,7 +98,7 @@ public class Game {
         for (int j = pair; j > 0; j--)
             this.board.move(coordinates[j], coordinates[j - 1]);
         for (Coordinate removedPiece : removedCoordinates)
-            this.board.put(removedPiece, new Pawn(this.getOppositeTurnColor()));
+            this.board.put(removedPiece, new Piece(this.getOppositeTurnColor()));
     }
 
     public boolean isBlocked() {
