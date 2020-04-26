@@ -10,15 +10,15 @@ import es.urjccode.mastercloudapps.adcs.draughts.models.Color;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Coordinate;
 
 class PlayView extends SubView {
-    
+
     private static final String COLOR_PARAM = "#color";
-    private static final String[] COLOR_VALUES = { "blancas", "negras" };
+    private static final String[] COLOR_VALUES = {"blancas", "negras"};
     private static final String PROMPT = "Mueven las " + PlayView.COLOR_PARAM + ": ";
     private static final String CANCEL_FORMAT = "-1";
     private static final String MOVEMENT_FORMAT = "[1-8]{2}(\\.[1-8]{2}){1,2}";
     private static final String ERROR_MESSAGE = "Error!!! Formato incorrecto";
     private static final String LOST_MESSAGE = "Derrota!!! No puedes mover tus fichas!!!";
-    private String string;
+    private String inputString;
 
     PlayView() {
         super();
@@ -29,7 +29,7 @@ class PlayView extends SubView {
         Error error;
         do {
             error = null;
-            this.string = this.read(playController.getColor());
+            this.inputString = this.read(playController.getColor());
             if (this.isCanceledFormat())
                 playController.cancel();
             else if (!this.isMoveFormat()) {
@@ -45,36 +45,40 @@ class PlayView extends SubView {
     }
 
     private String read(Color color) {
-        final String titleColor = PlayView.PROMPT.replace(PlayView.COLOR_PARAM ,PlayView.COLOR_VALUES[color.ordinal()]);
+        final String titleColor = PlayView.PROMPT.replace(PlayView.COLOR_PARAM, PlayView.COLOR_VALUES[color.ordinal()]);
         return this.console.readString(titleColor);
     }
 
     private boolean isCanceledFormat() {
-        return string.equals(PlayView.CANCEL_FORMAT);
+        return inputString.equals(PlayView.CANCEL_FORMAT);
     }
 
     private boolean isMoveFormat() {
-        return Pattern.compile(PlayView.MOVEMENT_FORMAT).matcher(string).find();
+        return Pattern.compile(PlayView.MOVEMENT_FORMAT).matcher(inputString).find();
     }
 
-    private void writeError(){
+    private void writeError() {
         this.console.writeln(PlayView.ERROR_MESSAGE);
     }
 
     private Coordinate[] getCoordinates() {
         assert this.isMoveFormat();
         List<Coordinate> coordinateList = new ArrayList<Coordinate>();
-        while (string.length() > 0){
-            coordinateList.add(Coordinate.getInstance(string.substring(0, 2)));
-            string = string.substring(2, string.length());
-            if (string.length() > 0 && string.charAt(0) == '.')
-                string = string.substring(1, string.length());
+        while (inputString.length() > 0) {
+            this.extractCoordinatesFromInputString(coordinateList);
         }
         Coordinate[] coordinates = new Coordinate[coordinateList.size()];
-        for(int i=0; i< coordinates.length; i++){
+        for (int i = 0; i < coordinates.length; i++) {
             coordinates[i] = coordinateList.get(i);
         }
         return coordinates;
+    }
+
+    private void extractCoordinatesFromInputString(List<Coordinate> coordinateList) {
+        coordinateList.add(Coordinate.getInstance(inputString.substring(0, 2)));
+        inputString = inputString.substring(2);
+        if (inputString.length() > 0 && inputString.charAt(0) == '.')
+            inputString = inputString.substring(1);
     }
 
     private void writeLost() {
