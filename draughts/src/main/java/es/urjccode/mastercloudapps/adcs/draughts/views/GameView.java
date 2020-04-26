@@ -24,14 +24,18 @@ class GameView extends SubView {
 
     private void writePiecesRow(final int row, InteractorController controller) {
         this.console.write((row + 1) + "");
+        this.writeBoardRows(row, controller);
+        this.console.writeln((row + 1) + "");
+    }
+
+    private void writeBoardRows(int row, InteractorController controller) {
         for (int j = 0; j < controller.getDimension(); j++) {
             Piece piece = controller.getPiece(new Coordinate(row, j));
             if (piece == null)
                 this.console.write(" ");
-            else 
+            else
                 this.console.write(piece.getCode());
         }
-        this.console.writeln((row + 1) + "");
     }
 
 }

@@ -52,8 +52,7 @@ public class GameBuilder {
         for (int j = 0; j < string.length(); j++) {
             Color color = this.getColor(string.charAt(j));
             if (color != null) {
-                Piece piece = new Piece(color);
-                board.put(new Coordinate(row, j), piece);
+                board.put(new Coordinate(row, j), new Piece(color));
             }
         }
     }
