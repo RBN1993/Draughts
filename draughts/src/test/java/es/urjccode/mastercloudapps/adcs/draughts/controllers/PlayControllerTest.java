@@ -1,9 +1,5 @@
 package es.urjccode.mastercloudapps.adcs.draughts.controllers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 import es.urjccode.mastercloudapps.adcs.draughts.models.Coordinate;
@@ -11,6 +7,8 @@ import es.urjccode.mastercloudapps.adcs.draughts.models.Game;
 import es.urjccode.mastercloudapps.adcs.draughts.models.State;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Color;
 import es.urjccode.mastercloudapps.adcs.draughts.models.GameBuilder;
+
+import static org.junit.Assert.*;
 
 public class PlayControllerTest {
 
@@ -47,7 +45,7 @@ public class PlayControllerTest {
     }
 
     @Test
-    public void testGivenPlayControllerWhenMoveWithoutMovementsThenIsBlocked() {
+    public void testGivenPlayControllerWhenMoveWithoutMovementsThenIsNotBlocked() {
         Game game = new GameBuilder().rows(
             "        ",
             "        ",
@@ -62,7 +60,7 @@ public class PlayControllerTest {
         Coordinate target = new Coordinate(4, 1);
         playController.move(origin, target);
         assertEquals(playController.getColor(target), Color.WHITE);
-        assertTrue(game.isBlocked());
+        assertFalse(game.isBlocked());
     }
 
     @Test
@@ -73,5 +71,45 @@ public class PlayControllerTest {
         assertEquals(Color.BLACK, playController.getColor());
         assertFalse(game.isBlocked());
     }
+
+    @Test
+    public void testGivenPlayControllerWhenBlackPieceCanEatButNoEatARandomBlackPieceWillBeRemoved() {
+        Game game = new GameBuilder().rows(
+            "        ",
+            "  n n   ",
+            "   n    ",
+            "  b     ",
+            "     b  ",
+            "b       ",
+            "        ",
+            "        ").build();
+        playController = new PlayController(game, new State());
+        Coordinate originWhite = new Coordinate(4, 5);
+        Coordinate targetWhite = new Coordinate(3, 6);
+        playController.move(originWhite, targetWhite);
+        Coordinate originB = new Coordinate(1, 2);
+        Coordinate targetB = new Coordinate(2, 1);
+        playController.move(originB, targetB);
+        assertNull(playController.getPiece(new Coordinate(2,3)));
+    }
+
+    @Test
+    public void testGivenPlayControllerWhenWhitePieceCanEatButNoEatARandomWhitePieceWillBeRemoved() {
+        Game game = new GameBuilder().rows(
+            "   n    ",
+            "        ",
+            "   n    ",
+            "  b b   ",
+            "     b  ",
+            "b       ",
+            "        ",
+            "        ").build();
+        playController = new PlayController(game, new State());
+        Coordinate origin = new Coordinate(3, 2);
+        Coordinate target = new Coordinate(2, 1);
+        playController.move(origin, target);
+        assertNull(playController.getPiece(new Coordinate(3,4)));
+    }
+
 
 }

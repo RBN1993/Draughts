@@ -2,6 +2,7 @@ package es.urjccode.mastercloudapps.adcs.draughts.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Game {
 
@@ -39,7 +40,33 @@ public class Game {
         do {
             error = this.isCorrectPairMove(pair, coordinates);
             if (error == null) {
+                List<Coordinate> possibleCoordinatesToRemove = new ArrayList<Coordinate>();
+                if (removedCoordinates.size() == 0) {
+                    List<Coordinate> coordinatesWithActualColor = this.getCoordinatesWithActualColor();
+                    for (Coordinate coordinateWithSameColor : coordinatesWithActualColor)
+                        if (this.getPiece(coordinateWithSameColor) != this.getPiece(coordinates[pair])) {
+
+                            List<Coordinate> diagonalCoordinates = coordinateWithSameColor.getDiagonalCoordinates(2);
+                            for (Coordinate targetCoordinate : diagonalCoordinates)
+                                if (this.isCorrectPairMove(0, coordinateWithSameColor, targetCoordinate) == null) {
+                                    if (this.getPiece(coordinateWithSameColor).getCode().equals("b") || this.getPiece(coordinateWithSameColor).getCode().equals("n"))
+                                        possibleCoordinatesToRemove.add(0, coordinateWithSameColor);
+                                }
+                        }
+                }
                 this.pairMove(removedCoordinates, pair, coordinates);
+                if (removedCoordinates.size() == 0) {
+                    if (possibleCoordinatesToRemove.size() == 1) {
+                        removedCoordinates.add(0, possibleCoordinatesToRemove.get(0));
+                        this.board.remove(possibleCoordinatesToRemove.get(0));
+                    }
+                    if (possibleCoordinatesToRemove.size() > 1) {
+                        int randomNumber = new Random().nextInt(possibleCoordinatesToRemove.size());
+                        removedCoordinates.add(0, possibleCoordinatesToRemove.get(randomNumber));
+                        this.board.remove(possibleCoordinatesToRemove.get(randomNumber));
+                    }
+                }
+
                 pair++;
             }
         } while (pair < coordinates.length - 1 && error == null);
