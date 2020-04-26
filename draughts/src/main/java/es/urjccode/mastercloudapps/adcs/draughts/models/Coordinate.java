@@ -33,7 +33,7 @@ public class Coordinate {
 
     private boolean isWithIn() {
         return Coordinate.LOWER_LIMIT <= row && row <= Coordinate.UPPER_LIMIT && Coordinate.LOWER_LIMIT <= column
-                && column <= Coordinate.UPPER_LIMIT;
+            && column <= Coordinate.UPPER_LIMIT;
     }
 
     private Coordinate substract(Coordinate coordinate) {
@@ -46,9 +46,8 @@ public class Coordinate {
 
     Direction getDirection(Coordinate coordinate) {
         assert coordinate != null;
-        Coordinate substract = coordinate.substract(this);
-        for (Direction direction : Direction.values()) 
-            if (direction.isOnDirection(substract)) 
+        for (Direction direction : Direction.values())
+            if (direction.isOnDirection(coordinate.substract(this)))
                 return direction;
         return null;
     }
@@ -68,12 +67,12 @@ public class Coordinate {
         return this.plus(direction.getDistanceCoordinate(1));
     }
 
-    List<Coordinate> getBetweenDiagonalCoordinates(Coordinate coordinate){
+    List<Coordinate> getBetweenDiagonalCoordinates(Coordinate coordinate) {
         assert this.isOnDiagonal(coordinate);
         List<Coordinate> coordinates = new ArrayList<Coordinate>();
         final Direction direction = this.getDirection(coordinate);
         Coordinate cursor = this.plus(direction.getDistanceCoordinate(1));
-        while (!cursor.equals(coordinate)){
+        while (!cursor.equals(coordinate)) {
             coordinates.add(cursor);
             cursor = cursor.plus(direction.getDistanceCoordinate(1));
         }
