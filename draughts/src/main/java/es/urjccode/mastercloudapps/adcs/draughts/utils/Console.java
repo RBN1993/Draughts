@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Console {
-	
+
 	private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
 			System.in));
 
@@ -19,20 +19,6 @@ public class Console {
 				ok = true;
 			} catch (IOException ex) {
 				this.writeError("de cadena de caracteres");
-			}
-		} while (!ok);
-		return input;
-	}
-
-	public int readInt(String title) {
-		int input = 0;
-		boolean ok = false;
-		do {
-			try {
-				input = Integer.parseInt(this.readString(title));
-				ok = true;
-			} catch (NumberFormatException ex) {
-				this.writeError("entero");
 			}
 		} while (!ok);
 		return input;
@@ -56,7 +42,7 @@ public class Console {
 	public void writeln() {
 		System.out.println();
 	}
-	
+
 	public void write(String string) {
 		System.out.print(string);
 	}
