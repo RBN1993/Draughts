@@ -73,18 +73,16 @@ public class Game {
         if (removedCoordinates.size() == 0) {
             List<Coordinate> coordinatesWithActualColor = this.getCoordinatesWithActualColor();
             for (Coordinate coordinateWithSameColor : coordinatesWithActualColor)
-                if (this.getPiece(coordinateWithSameColor) != this.getPiece(coordinates[pair])) {
-                    List<Coordinate> diagonalCoordinates = coordinateWithSameColor.getDiagonalCoordinates(2);
-                    this.storePossibleCoordinates(possibleCoordinatesToRemove, coordinateWithSameColor, diagonalCoordinates);
-                }
+                if (this.getPiece(coordinateWithSameColor) != this.getPiece(coordinates[pair]))
+                    this.storePossibleCoordinates(possibleCoordinatesToRemove, coordinateWithSameColor);
         }
     }
 
-    private void storePossibleCoordinates(List<Coordinate> possibleCoordinatesToRemove, Coordinate coordinateWithSameColor, List<Coordinate> diagonalCoordinates) {
+    private void storePossibleCoordinates(List<Coordinate> possibleCoordinatesToRemove, Coordinate coordinateWithSameColor) {
+        List<Coordinate> diagonalCoordinates = coordinateWithSameColor.getDiagonalCoordinates(2);
         for (Coordinate targetCoordinate : diagonalCoordinates)
             if (this.isCorrectPairMove(0, coordinateWithSameColor, targetCoordinate) == null) {
-                if (this.getPiece(coordinateWithSameColor).getCode().equals("b") || this.getPiece(coordinateWithSameColor).getCode().equals("n"))
-                    possibleCoordinatesToRemove.add(0, coordinateWithSameColor);
+                possibleCoordinatesToRemove.add(0, coordinateWithSameColor);
             }
     }
 
