@@ -90,6 +90,7 @@ public class PlayControllerTest {
         Coordinate originB = new Coordinate(1, 2);
         Coordinate targetB = new Coordinate(2, 1);
         playController.move(originB, targetB);
+        assertEquals(Color.WHITE, playController.getColor());
         assertNull(playController.getPiece(new Coordinate(2,3)));
     }
 
@@ -108,8 +109,26 @@ public class PlayControllerTest {
         Coordinate origin = new Coordinate(3, 2);
         Coordinate target = new Coordinate(2, 1);
         playController.move(origin, target);
+        assertEquals(Color.BLACK, playController.getColor());
         assertNull(playController.getPiece(new Coordinate(3,4)));
     }
 
-
+    @Test
+    public void testGivenPlayControllerWhenMoveAndWhiteCanEatThenRemoveWhite() {
+        Game game = new GameBuilder().rows(
+            "        ",
+            "        ",
+            "   n    ",
+            "  b n   ",
+            "     b  ",
+            "b       ",
+            "        ",
+            "        ").build();
+        playController = new PlayController(game, new State());
+        Coordinate origin = new Coordinate(5, 0);
+        Coordinate target = new Coordinate(4, 1);
+        playController.move(origin, target);
+        assertEquals(Color.BLACK, playController.getColor());
+        assertNull(playController.getPiece(new Coordinate(3, 2)));
+    }
 }
