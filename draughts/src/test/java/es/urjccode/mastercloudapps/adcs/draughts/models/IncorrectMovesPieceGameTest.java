@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class IncorrectMovesPawnGameTest extends GameTest {
+public class IncorrectMovesPieceGameTest extends GameTest {
 
     private Color color;
     private String[] strings;
@@ -31,14 +31,14 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ",
             "        ");
-        assertErrorMove(Error.EMPTY_ORIGIN, 
-            new Coordinate(4, 3), 
+        assertErrorMove(Error.EMPTY_ORIGIN,
+            new Coordinate(4, 3),
             new Coordinate(3, 4));
     }
 
     @Test
     public void testGivenGameWhenMoveBLACKThenEMPTY_ORIGIN() {
-        setGame(Color.BLACK, 
+        setGame(Color.BLACK,
         "        ",
         "        ",
         "        ",
@@ -47,8 +47,8 @@ public class IncorrectMovesPawnGameTest extends GameTest {
         "        ",
         "        ",
         "        ");
-        assertErrorMove(Error.EMPTY_ORIGIN, 
-            new Coordinate(4, 3), 
+        assertErrorMove(Error.EMPTY_ORIGIN,
+            new Coordinate(4, 3),
             new Coordinate(3, 4));
     }
 
@@ -63,8 +63,8 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ",
             "        ");
-        assertErrorMove(Error.OPPOSITE_PIECE, 
-            new Coordinate(2, 1), 
+        assertErrorMove(Error.OPPOSITE_PIECE,
+            new Coordinate(2, 1),
             new Coordinate(3, 0));
     }
 
@@ -80,7 +80,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "  b     ");
         assertErrorMove(Error.OPPOSITE_PIECE,
-            new Coordinate(7, 2), 
+            new Coordinate(7, 2),
             new Coordinate(6, 3));
     }
 
@@ -96,7 +96,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.NOT_DIAGONAL,
-            new Coordinate(5, 2), 
+            new Coordinate(5, 2),
             new Coordinate(4, 2));
     }
 
@@ -112,13 +112,13 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.NOT_DIAGONAL,
-            new Coordinate(5, 2), 
+            new Coordinate(5, 2),
             new Coordinate(6, 2));
     }
 
     @Test
     public void testGivenGameWhenMoveRightThenNOT_DIAGONAL() {
-        setGame(Color.BLACK, 
+        setGame(Color.BLACK,
             " n      ",
             "        ",
             "        ",
@@ -127,8 +127,8 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ",
             "        ");
-        assertErrorMove(Error.NOT_DIAGONAL, 
-            new Coordinate(0, 1), 
+        assertErrorMove(Error.NOT_DIAGONAL,
+            new Coordinate(0, 1),
             new Coordinate(0, 2));
     }
 
@@ -144,7 +144,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.NOT_DIAGONAL,
-            new Coordinate(0, 1), 
+            new Coordinate(0, 1),
             new Coordinate(0, 0));
     }
 
@@ -160,7 +160,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.NOT_EMPTY_TARGET,
-            new Coordinate(4, 7), 
+            new Coordinate(4, 7),
             new Coordinate(3, 6));
     }
 
@@ -176,7 +176,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.NOT_EMPTY_TARGET,
-            new Coordinate(0, 1), 
+            new Coordinate(0, 1),
             new Coordinate(1, 0));
     }
 
@@ -192,7 +192,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.NOT_EMPTY_TARGET,
-            new Coordinate(4, 1), 
+            new Coordinate(4, 1),
             new Coordinate(2, 3));
     }
 
@@ -208,7 +208,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.NOT_EMPTY_TARGET,
-            new Coordinate(3, 0), 
+            new Coordinate(3, 0),
             new Coordinate(5, 2));
     }
 
@@ -224,7 +224,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.NOT_ADVANCED,
-            new Coordinate(4, 7), 
+            new Coordinate(4, 7),
             new Coordinate(5, 6));
     }
 
@@ -240,11 +240,11 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.NOT_ADVANCED,
-            new Coordinate(1, 0), 
+            new Coordinate(1, 0),
             new Coordinate(0, 1));
     }
 
-    
+
     @Test
     public void testGivenGameWhenMoveWHITEThenWITHOUT_EATING() {
         setGame(Color.WHITE,
@@ -257,7 +257,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.WITHOUT_EATING,
-            new Coordinate(5, 4), 
+            new Coordinate(5, 4),
             new Coordinate(3, 2));
     }
 
@@ -273,7 +273,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.WITHOUT_EATING,
-            new Coordinate(3, 2), 
+            new Coordinate(3, 2),
             new Coordinate(5, 0));
     }
 
@@ -289,7 +289,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.TOO_MUCH_ADVANCED,
-            new Coordinate(5, 0), 
+            new Coordinate(5, 0),
             new Coordinate(2, 3));
     }
 
@@ -305,7 +305,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.TOO_MUCH_ADVANCED,
-            new Coordinate(2, 1), 
+            new Coordinate(2, 1),
             new Coordinate(5, 4));
     }
 
@@ -321,7 +321,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.NOT_DIAGONAL,
-            new Coordinate(5, 2), 
+            new Coordinate(5, 2),
             new Coordinate(3, 4),
             new Coordinate(2, 4));
     }
@@ -338,7 +338,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.NOT_DIAGONAL,
-            new Coordinate(3, 4), 
+            new Coordinate(3, 4),
             new Coordinate(5, 2),
             new Coordinate(4, 2));
     }
@@ -355,7 +355,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.NOT_DIAGONAL,
-            new Coordinate(3, 4), 
+            new Coordinate(3, 4),
             new Coordinate(5, 2),
             new Coordinate(5, 3));
     }
@@ -372,7 +372,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.NOT_DIAGONAL,
-            new Coordinate(4, 3), 
+            new Coordinate(4, 3),
             new Coordinate(2, 5),
             new Coordinate(1, 5));
     }
@@ -389,7 +389,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             " n      ",
             "b       ");
         assertErrorMove(Error.NOT_EMPTY_TARGET,
-            new Coordinate(7, 0), 
+            new Coordinate(7, 0),
             new Coordinate(5, 2),
             new Coordinate(3, 4));
     }
@@ -406,11 +406,11 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.NOT_EMPTY_TARGET,
-            new Coordinate(1, 2), 
+            new Coordinate(1, 2),
             new Coordinate(3, 4),
             new Coordinate(5, 2));
     }
-    
+
     @Test
     public void testGivenGameWhenMoveBLACKEatingThenTOO_MUCH_ADVANCED(){
         setGame(Color.WHITE,
@@ -423,7 +423,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.TOO_MUCH_ADVANCED,
-            new Coordinate(5, 6), 
+            new Coordinate(5, 6),
             new Coordinate(3, 4),
             new Coordinate(0, 1));
     }
@@ -440,7 +440,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.COLLEAGUE_EATING,
-            new Coordinate(2, 3), 
+            new Coordinate(2, 3),
             new Coordinate(0, 1));
     }
 
@@ -456,7 +456,7 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.COLLEAGUE_EATING,
-            new Coordinate(1, 2), 
+            new Coordinate(1, 2),
             new Coordinate(3, 4));
     }
 
@@ -472,8 +472,8 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.TOO_MUCH_JUMPS,
-            new Coordinate(4, 1), 
-            new Coordinate(3, 2), 
+            new Coordinate(4, 1),
+            new Coordinate(3, 2),
             new Coordinate(2, 3));
     }
 
@@ -489,8 +489,8 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.TOO_MUCH_JUMPS,
-            new Coordinate(2, 3), 
-            new Coordinate(3, 4), 
+            new Coordinate(2, 3),
+            new Coordinate(3, 4),
             new Coordinate(4, 3));
     }
 
@@ -506,8 +506,8 @@ public class IncorrectMovesPawnGameTest extends GameTest {
             "        ",
             "        ");
         assertErrorMove(Error.TOO_MUCH_JUMPS,
-            new Coordinate(4, 1), 
-            new Coordinate(2, 3), 
+            new Coordinate(4, 1),
+            new Coordinate(2, 3),
             new Coordinate(1, 2));
     }
 

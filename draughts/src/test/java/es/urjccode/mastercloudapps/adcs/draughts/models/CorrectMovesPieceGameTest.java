@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class CorrectMovesPawnGameTest extends GameTest {
+public class CorrectMovesPieceGameTest extends GameTest {
 
     private void assertMove(Coordinate... coordinates) {
         assertNull(this.game.move(coordinates));
@@ -164,7 +164,7 @@ public class CorrectMovesPawnGameTest extends GameTest {
     }
 
     @Test
-    public void testGivenGameWhenWhitePawnAtLimitThenWhitePawn() {
+    public void testGivenGameWhenWhitePPieceAtLimitThenWhitePPiece() {
         this.setGame(Color.WHITE,
             "        ",
             "b       ",
@@ -189,7 +189,7 @@ public class CorrectMovesPawnGameTest extends GameTest {
     }
 
     @Test
-    public void testGivenGameWhenBlackPawnAtLimitThenBlackPawn() {
+    public void testGivenGameWhenBlackPPieceAtLimitThenBlackPPiece() {
         this.setGame(Color.BLACK,
             "        ",
             "        ",
